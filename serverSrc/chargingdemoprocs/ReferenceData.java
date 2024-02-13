@@ -40,6 +40,6 @@ public class ReferenceData {
     public static final byte STATUS_RECORD_HAS_BEEN_SOFTLOCKED = 54;
     public static final byte STATUS_CREDIT_ADDED = 56;
 
-    public static final int LOCK_TIMEOUT_MS = 50;
+    public static final byte LOCK_TIMEOUT_MS = 50;
 
 }

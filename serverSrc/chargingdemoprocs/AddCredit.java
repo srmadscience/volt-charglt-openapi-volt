@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /* This file is part of VoltDB.
- * Copyright (C) 2008-2022 VoltDB Inc.
+ * Copyright (C) 2008-2024 VoltDB Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -154,6 +154,6 @@ public class AddCredit extends VoltAPIProcedure {
         voltQueueSQL(getUserBalance, userId);
         voltQueueSQL(getCurrrentlyAllocated, userId);
 
-        return castObjectToVoltTableArray(new AddCreditUserStatus(voltExecuteSQL(true)), 0, "Credit Added");
+        return castObjectToVoltTableArray(new AddCreditUserStatus(userId,voltExecuteSQL(true)), 0, "Credit Added");
     }
 }

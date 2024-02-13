@@ -65,8 +65,9 @@ public class DelUser extends VoltAPIProcedure {
     @Produces({ "application/json;charset=utf-8" })
     @Operation(summary = "Delete User", description = "Delete User", tags = { "chargingdemoprocs" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
-            @ApiResponse(responseCode = "400", description = "Internal Server Error", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
+            @ApiResponse(responseCode = "201", description = "Success", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "202", description = "Success", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "Error", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
     public VoltTable[] run(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId)
@@ -79,11 +80,12 @@ public class DelUser extends VoltAPIProcedure {
 
         VoltTable[] results = voltExecuteSQL(true);
 
+        results[0].advanceRow();
         if (results[0].getLong(0) == 1) {
-            return castObjectToVoltTableArray(null, 0, "User Deleted");
+            return castObjectToVoltTableArray(null, 201, "User Deleted");
         }
 
-        return castObjectToVoltTableArray(null, 1, "User Not Found");
+        return castObjectToVoltTableArray(null, 400, "User Not Found");
 
     }
 }

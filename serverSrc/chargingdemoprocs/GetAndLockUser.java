@@ -46,7 +46,7 @@ public class GetAndLockUser extends VoltAPIProcedure {
 
     public static final SQLStmt getUser = new SQLStmt("SELECT * FROM user_table WHERE userid = ?;");
 
-    public static final SQLStmt getAllTxn = new SQLStmt("SELECT user_txn_id, txn_time "
+    public static final SQLStmt getAllTxn = new SQLStmt("SELECT * "
         + "FROM user_recent_transactions "
         + "WHERE userid = ? ORDER BY txn_time, user_txn_id;");
 
@@ -57,6 +57,9 @@ public class GetAndLockUser extends VoltAPIProcedure {
         + "SET user_softlock_sessionid = ? "
         + "   ,user_softlock_expiry = DATEADD(MILLISECOND,?,?) "
         + "WHERE userid = ?;");
+    
+    public static final SQLStmt getUserBalance = new SQLStmt("SELECT * FROM user_balance WHERE userid = ?;");
+
 
     // @formatter:on
 
@@ -114,8 +117,10 @@ public class GetAndLockUser extends VoltAPIProcedure {
         this.setAppStatusCode(statusCode);
 
         voltQueueSQL(getUser, userId);
-        voltQueueSQL(getAllTxn, userId);
         voltQueueSQL(getUserUsage, userId);
+        voltQueueSQL(getUserBalance, userId);
+        voltQueueSQL(getAllTxn, userId);
+
 
         UserObject u = new UserObject(userId, statusCode, lockingSessionId, voltExecuteSQL(true));
 

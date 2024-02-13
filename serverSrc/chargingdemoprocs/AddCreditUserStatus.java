@@ -23,19 +23,31 @@
 
 package chargingdemoprocs;
 
+import org.voltdb.SQLStmt;
 import org.voltdb.VoltTable;
 
 public class AddCreditUserStatus {
-
-    public AddCreditUserStatus(VoltTable[] voltExecuteSQL) {
-
-    }
 
     public long userId;
 
     public long balance;
 
     public long currentlyAllocated;
+
+    public AddCreditUserStatus(long userId, VoltTable[] results) {
+
+        this.userId = userId;
+
+        VoltTable userBalanceRow = results[results.length - 2];
+        VoltTable currentlyAllocatedRow = results[results.length - 1];
+
+        userBalanceRow.advanceRow();
+        currentlyAllocatedRow.advanceRow();
+
+        balance = userBalanceRow.getLong("BALANCE");
+        currentlyAllocated = currentlyAllocatedRow.getLong("ALLOCATED_AMOUNT");
+
+    }
 
     /**
      * @return the userId
@@ -56,6 +68,19 @@ public class AddCreditUserStatus {
      */
     public long getCurrentlyAllocated() {
         return currentlyAllocated;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("AddCreditUserStatus [userId=");
+        builder.append(userId);
+        builder.append(", balance=");
+        builder.append(balance);
+        builder.append(", currentlyAllocated=");
+        builder.append(currentlyAllocated);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

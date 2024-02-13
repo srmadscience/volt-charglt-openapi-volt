@@ -27,7 +27,7 @@ import org.voltdb.VoltTable;
 
 public class ReportQuotaUsageStatus {
 
-    public byte statusCode;
+    public int statusCode;
 
     public long balance;
 
@@ -35,7 +35,7 @@ public class ReportQuotaUsageStatus {
 
     public long currentlyAllocated;
 
-    public ReportQuotaUsageStatus(byte statusCode, VoltTable[] results) {
+    public ReportQuotaUsageStatus(int statusCode, VoltTable[] results) {
         this.statusCode = statusCode;
 
         VoltTable userBalanceRow = results[results.length - 2];
@@ -49,6 +49,21 @@ public class ReportQuotaUsageStatus {
 
         currentlyAllocated = currentlyAllocatedRow.getLong("ALLOCATED_AMOUNT");
 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ReportQuotaUsageStatus [statusCode=");
+        builder.append(statusCode);
+        builder.append(", balance=");
+        builder.append(balance);
+        builder.append(", sessionId=");
+        builder.append(sessionId);
+        builder.append(", currentlyAllocated=");
+        builder.append(currentlyAllocated);
+        builder.append("]");
+        return builder.toString();
     }
 
 }
