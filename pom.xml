@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>org.voltdb</groupId>
 			<artifactId>clientjar</artifactId>
-			<version>11.0</version>
+			<version>13.0.2</version>
 			<scope>system</scope>
 			<systemPath>${client-jar-path}</systemPath>
 		</dependency>
