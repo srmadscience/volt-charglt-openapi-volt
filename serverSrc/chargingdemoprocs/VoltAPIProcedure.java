@@ -9,7 +9,7 @@ import org.voltdb.VoltType;
 import com.google.gson.Gson;
 
 public abstract class VoltAPIProcedure extends VoltProcedure {
-    
+
     public static final String RESPONSE_200 = "200";
     public static final String RESPONSE_400 = "400";
 
@@ -34,10 +34,7 @@ public abstract class VoltAPIProcedure extends VoltProcedure {
     public static final byte RESPONSE_VOLT_NOT_FOUND = 14;
     public static final String RESPONSE_VOLT_NOT_FOUND_STRING = "14";
 
-
     Gson json = null;
-
-
 
     @SuppressWarnings("unused")
     protected String toJson(Object thingsToMakeIntoJson) {
@@ -70,22 +67,23 @@ public abstract class VoltAPIProcedure extends VoltProcedure {
     @SuppressWarnings("unused")
     protected VoltTable[] castObjectToVoltTableArray(Object thingsToCast, int statusCode, String optionalMessage) {
 
-        VoltTable[]  returnArray = new VoltTable[1];
-        returnArray[0] = new VoltTable(new VoltTable.ColumnInfo("PAYLOAD", VoltType.STRING)
-                                      ,new VoltTable.ColumnInfo("STATUS_CODE", VoltType.INTEGER)
-                                      ,new VoltTable.ColumnInfo("OPTIONAL_MESSAGE", VoltType.STRING));
+        VoltTable[] returnArray = new VoltTable[1];
+        returnArray[0] = new VoltTable(new VoltTable.ColumnInfo("PAYLOAD", VoltType.STRING),
+                new VoltTable.ColumnInfo("STATUS_CODE", VoltType.INTEGER),
+                new VoltTable.ColumnInfo("OPTIONAL_MESSAGE", VoltType.STRING));
         returnArray[0].addRow(toJson(thingsToCast), statusCode, optionalMessage);
         this.setAppStatusCode(RESPONSE_VOLT_PROC_OK);
         return returnArray;
-        }
+    }
 
     @SuppressWarnings("unused")
-    protected VoltTable[] castObjectArrayToVoltTableArray(Object[] thingsToCast, int statusCode, String optionalMessage) {
+    protected VoltTable[] castObjectArrayToVoltTableArray(Object[] thingsToCast, int statusCode,
+            String optionalMessage) {
 
-        VoltTable[]  returnArray = new VoltTable[thingsToCast.length];
-        returnArray[0] = new VoltTable(new VoltTable.ColumnInfo("PAYLOAD", VoltType.STRING)
-                                      ,new VoltTable.ColumnInfo("STATUS_CODE", VoltType.INTEGER)
-                                      ,new VoltTable.ColumnInfo("OPTIONAL_MESSAGE", VoltType.STRING));
+        VoltTable[] returnArray = new VoltTable[thingsToCast.length];
+        returnArray[0] = new VoltTable(new VoltTable.ColumnInfo("PAYLOAD", VoltType.STRING),
+                new VoltTable.ColumnInfo("STATUS_CODE", VoltType.INTEGER),
+                new VoltTable.ColumnInfo("OPTIONAL_MESSAGE", VoltType.STRING));
 
         for (Object element : thingsToCast) {
             returnArray[0].addRow(toJson(element), statusCode, optionalMessage);
@@ -93,7 +91,6 @@ public abstract class VoltAPIProcedure extends VoltProcedure {
 
         this.setAppStatusCode(RESPONSE_VOLT_PROC_OK);
         return returnArray;
-        }
-
+    }
 
 }

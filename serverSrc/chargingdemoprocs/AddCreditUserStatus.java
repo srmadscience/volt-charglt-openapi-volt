@@ -26,15 +26,15 @@ package chargingdemoprocs;
 import org.voltdb.VoltTable;
 
 public class AddCreditUserStatus {
-    
+
     public AddCreditUserStatus(VoltTable[] voltExecuteSQL) {
-        
+
     }
 
     public long userId;
-    
+
     public long balance;
-    
+
     public long currentlyAllocated;
 
     /**

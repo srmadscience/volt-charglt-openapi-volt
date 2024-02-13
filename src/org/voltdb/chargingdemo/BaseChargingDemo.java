@@ -697,11 +697,11 @@ public abstract class BaseChargingDemo {
 
     /**
      * Get Linux process ID - used for pseudo unique ids
-     * 
+     *
      * @return Linux process ID
      */
     private static long getPid() {
-        return 0l; //TODO.current().pid();
+        return 0l; // TODO.current().pid();
     }
 
     /**

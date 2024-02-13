@@ -29,8 +29,8 @@ public class UserObject {
 
     public long userId;
     public byte statusCode;
-    public long lockId = -1; 
-    
+    public long lockId = -1;
+
     public UserObject(long userId, byte statusCode, long lockId, VoltTable[] voltTables) {
         super();
         this.userId = userId;
@@ -59,5 +59,4 @@ public class UserObject {
         return lockId;
     }
 
-   
 }

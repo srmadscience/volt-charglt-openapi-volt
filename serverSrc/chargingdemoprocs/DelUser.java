@@ -30,7 +30,6 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +64,7 @@ public class DelUser extends VoltAPIProcedure {
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
     @Operation(summary = "Delete User", description = "Delete User", tags = { "chargingdemoprocs" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "Internal Server Error", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 

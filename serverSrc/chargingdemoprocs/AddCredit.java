@@ -32,21 +32,16 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
 import org.voltdb.types.TimestampType;
-
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @Path("/addCredit")
 
@@ -95,20 +90,21 @@ public class AddCredit extends VoltAPIProcedure {
      * @return Balance and Credit info
      * @throws VoltAbortException
      */
-    
-   @POST
-    
+
+    @POST
+
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
-   @Operation(summary = "Adds Credit", description = "Adds Credit", tags={ "chargingdemoprocs" })
-   @ApiResponses(value = { 
-       @ApiResponse(responseCode = RESPONSE_200, description = "Added", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = AddCreditUserStatus.class))),
-       @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-    })
+    @Operation(summary = "Adds Credit", description = "Adds Credit", tags = { "chargingdemoprocs" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = RESPONSE_200, description = "Added", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = AddCreditUserStatus.class))),
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(@Parameter(in = ParameterIn.PATH, description = "User ID",required=true) @PathParam("userId")  long userId
-            , @Parameter(in = ParameterIn.PATH, description = "Credit Delta",required=true) @PathParam("extraCredit")   long extraCredit
-            ,  @Parameter(in = ParameterIn.PATH, description = "Transaction ID",required=true) @PathParam("txnId")  String txnId) throws VoltAbortException {
+    public VoltTable[] run(
+            @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId,
+            @Parameter(in = ParameterIn.PATH, description = "Credit Delta", required = true) @PathParam("extraCredit") long extraCredit,
+            @Parameter(in = ParameterIn.PATH, description = "Transaction ID", required = true) @PathParam("txnId") String txnId)
+            throws VoltAbortException {
 
         // See if we know about this user and transaction...
         voltQueueSQL(getUser, userId);
@@ -130,7 +126,8 @@ public class AddCredit extends VoltAPIProcedure {
                     "Event already happened at " + userAndTxn[1].getTimestampAsTimestamp("txn_time").toString());
             voltQueueSQL(reportFinancialEvent, userId, extraCredit, txnId, "Credit already added");
             voltExecuteSQL(true);
-            return castObjectToVoltTableArray(null, 2, "Event already happened at " + userAndTxn[1].getTimestampAsTimestamp("txn_time").toString());
+            return castObjectToVoltTableArray(null, 2,
+                    "Event already happened at " + userAndTxn[1].getTimestampAsTimestamp("txn_time").toString());
 
         } else {
 
@@ -157,7 +154,6 @@ public class AddCredit extends VoltAPIProcedure {
         voltQueueSQL(getUserBalance, userId);
         voltQueueSQL(getCurrrentlyAllocated, userId);
 
-        
         return castObjectToVoltTableArray(new AddCreditUserStatus(voltExecuteSQL(true)), 0, "Credit Added");
     }
 }

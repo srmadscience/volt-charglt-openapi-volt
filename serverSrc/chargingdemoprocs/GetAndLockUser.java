@@ -29,12 +29,10 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
 import org.voltdb.types.TimestampType;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -74,10 +72,9 @@ public class GetAndLockUser extends VoltAPIProcedure {
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
     @Operation(summary = "GetAndLockUser", description = "GetAndLockUser", tags = { "chargingdemoprocs" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = UserObject.class))),
-            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-         })
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
     public VoltTable[] run(long userId) throws VoltAbortException {
 
@@ -93,7 +90,7 @@ public class GetAndLockUser extends VoltAPIProcedure {
         final TimestampType currentTimestamp = new TimestampType(this.getTransactionTime());
         final TimestampType lockingSessionExpiryTimestamp = userRecord[0]
                 .getTimestampAsTimestamp("user_softlock_expiry");
-        
+
         byte statusCode;
         long lockingSessionId = -1;
 
@@ -115,12 +112,12 @@ public class GetAndLockUser extends VoltAPIProcedure {
         }
 
         this.setAppStatusCode(statusCode);
-        
+
         voltQueueSQL(getUser, userId);
         voltQueueSQL(getAllTxn, userId);
         voltQueueSQL(getUserUsage, userId);
 
-        UserObject u = new UserObject(userId,statusCode,lockingSessionId,voltExecuteSQL(true));
+        UserObject u = new UserObject(userId, statusCode, lockingSessionId, voltExecuteSQL(true));
 
         return castObjectToVoltTableArray(u, statusCode, "Locked");
 

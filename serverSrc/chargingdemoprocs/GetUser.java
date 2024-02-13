@@ -1,7 +1,5 @@
 package chargingdemoprocs;
 
-import java.lang.reflect.Type;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -32,15 +30,11 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
-
-
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,7 +44,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 public class GetUser extends VoltAPIProcedure {
 
- 
     // @formatter:off
 
 	public static final SQLStmt getUser = new SQLStmt("SELECT * FROM user_table WHERE userid = ?;");
@@ -73,26 +66,22 @@ public class GetUser extends VoltAPIProcedure {
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
     @Operation(summary = "GetUser", description = "GetUser", tags = { "chargingdemoprocs" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = UserObject.class))),
-            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-         })
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
     public VoltTable[] run(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId)
             throws VoltAbortException {
 
- 
         voltQueueSQL(getUser, userId);
         voltQueueSQL(getUserUsage, userId);
         voltQueueSQL(getUserBalance, userId);
         voltQueueSQL(getAllTxn, userId);
-        
-        UserObject u = new UserObject(userId,RESPONSE_VOLT_PROC_OK,-1,voltExecuteSQL(true));
+
+        UserObject u = new UserObject(userId, RESPONSE_VOLT_PROC_OK, -1, voltExecuteSQL(true));
 
         return castObjectToVoltTableArray(u, RESPONSE_VOLT_PROC_OK, "Locked");
     }
 
- 
- 
 }

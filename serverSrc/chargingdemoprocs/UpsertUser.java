@@ -29,8 +29,6 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
 import org.voltdb.types.TimestampType;
 
@@ -68,10 +66,9 @@ public class UpsertUser extends VoltAPIProcedure {
 
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
-            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-         })
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
     public VoltTable[] run(long userId, long addBalance, String json, String purpose, TimestampType lastSeen,
             String txnId) throws VoltAbortException {

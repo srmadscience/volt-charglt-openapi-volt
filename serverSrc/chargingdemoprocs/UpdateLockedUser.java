@@ -30,7 +30,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.voltdb.SQLStmt;
-
 import org.voltdb.VoltTable;
 import org.voltdb.types.TimestampType;
 
@@ -76,10 +75,9 @@ public class UpdateLockedUser extends VoltAPIProcedure {
 
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
-            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-         })
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
     public VoltTable[] run(
             @Parameter(in = ParameterIn.PATH, description = "userId", required = true) @PathParam("userId") long userId,

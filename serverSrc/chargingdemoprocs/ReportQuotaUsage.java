@@ -30,7 +30,6 @@ import javax.ws.rs.Produces;
  */
 
 import org.voltdb.SQLStmt;
-import org.voltdb.VoltProcedure;
 import org.voltdb.VoltTable;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -76,7 +75,7 @@ public class ReportQuotaUsage extends VoltAPIProcedure {
 
 	public static final SQLStmt createAllocation = new SQLStmt("INSERT INTO user_usage_table "
 			+ "(userid, allocated_amount,sessionid, lastdate) VALUES (?,?,?,NOW);");
-  
+
 
 	// @formatter:on
     @POST
@@ -84,11 +83,10 @@ public class ReportQuotaUsage extends VoltAPIProcedure {
 
     @Consumes({ "application/json;charset=utf-8" })
     @Produces({ "application/json;charset=utf-8" })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = ReportQuotaUsageStatus.class))),
-            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class)))      
-         })
-    
+            @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
+
     /**
      * @param userId         - Identifies a user
      * @param unitsUsed      - How many units of credit were used. Initially this
