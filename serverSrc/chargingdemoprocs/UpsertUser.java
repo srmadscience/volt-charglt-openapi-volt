@@ -70,7 +70,7 @@ public class UpsertUser extends VoltAPIProcedure {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(long userId, long addBalance, String json, String purpose, TimestampType lastSeen,
+    public VoltTable[] UpsertUser(long userId, long addBalance, String json, String purpose, TimestampType lastSeen,
             String txnId) throws VoltAbortException {
 
         long currentBalance = 0;

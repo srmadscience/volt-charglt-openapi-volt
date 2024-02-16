@@ -26,13 +26,16 @@ import javax.validation.Valid;
 /**
  * VoltTable
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2024-02-13T22:26:01.216867Z[Europe/Dublin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2024-02-16T08:28:20.310933Z[Europe/Dublin]")
 public class VoltTable   {
   @JsonProperty("buffer")
   private VoltTableBuffer buffer = null;
 
-  @JsonProperty("statusCode")
-  private byte[] statusCode = null;
+  @JsonProperty("columnCount")
+  private Integer columnCount = null;
+
+  @JsonProperty("rowCount")
+  private Integer rowCount = null;
 
   @JsonProperty("serializedSize")
   private Integer serializedSize = null;
@@ -40,23 +43,20 @@ public class VoltTable   {
   @JsonProperty("tableSchema")
   private List<ColumnInfo> tableSchema = null;
 
-  @JsonProperty("rowCount")
-  private Integer rowCount = null;
+  @JsonProperty("statusCode")
+  private byte[] statusCode = null;
 
-  @JsonProperty("columnCount")
-  private Integer columnCount = null;
+  @JsonProperty("rowObjects")
+  private List<Object> rowObjects = null;
+
+  @JsonProperty("activeRowIndex")
+  private Integer activeRowIndex = null;
 
   @JsonProperty("rawRow")
   private VoltTableBuffer rawRow = null;
 
   @JsonProperty("row")
   private String row = null;
-
-  @JsonProperty("activeRowIndex")
-  private Integer activeRowIndex = null;
-
-  @JsonProperty("rowObjects")
-  private List<Object> rowObjects = null;
 
   public VoltTable buffer(VoltTableBuffer buffer) {
     this.buffer = buffer;
@@ -78,23 +78,42 @@ public class VoltTable   {
     this.buffer = buffer;
   }
 
-  public VoltTable statusCode(byte[] statusCode) {
-    this.statusCode = statusCode;
+  public VoltTable columnCount(Integer columnCount) {
+    this.columnCount = columnCount;
     return this;
   }
 
   /**
-   * Get statusCode
-   * @return statusCode
+   * Get columnCount
+   * @return columnCount
    **/
-  @JsonProperty("statusCode")
+  @JsonProperty("columnCount")
   @Schema(description = "")
-  public byte[] getStatusCode() {
-    return statusCode;
+  public Integer getColumnCount() {
+    return columnCount;
   }
 
-  public void setStatusCode(byte[] statusCode) {
-    this.statusCode = statusCode;
+  public void setColumnCount(Integer columnCount) {
+    this.columnCount = columnCount;
+  }
+
+  public VoltTable rowCount(Integer rowCount) {
+    this.rowCount = rowCount;
+    return this;
+  }
+
+  /**
+   * Get rowCount
+   * @return rowCount
+   **/
+  @JsonProperty("rowCount")
+  @Schema(description = "")
+  public Integer getRowCount() {
+    return rowCount;
+  }
+
+  public void setRowCount(Integer rowCount) {
+    this.rowCount = rowCount;
   }
 
   public VoltTable serializedSize(Integer serializedSize) {
@@ -144,42 +163,69 @@ public class VoltTable   {
     this.tableSchema = tableSchema;
   }
 
-  public VoltTable rowCount(Integer rowCount) {
-    this.rowCount = rowCount;
+  public VoltTable statusCode(byte[] statusCode) {
+    this.statusCode = statusCode;
     return this;
   }
 
   /**
-   * Get rowCount
-   * @return rowCount
+   * Get statusCode
+   * @return statusCode
    **/
-  @JsonProperty("rowCount")
+  @JsonProperty("statusCode")
   @Schema(description = "")
-  public Integer getRowCount() {
-    return rowCount;
+  public byte[] getStatusCode() {
+    return statusCode;
   }
 
-  public void setRowCount(Integer rowCount) {
-    this.rowCount = rowCount;
+  public void setStatusCode(byte[] statusCode) {
+    this.statusCode = statusCode;
   }
 
-  public VoltTable columnCount(Integer columnCount) {
-    this.columnCount = columnCount;
+  public VoltTable rowObjects(List<Object> rowObjects) {
+    this.rowObjects = rowObjects;
+    return this;
+  }
+
+  public VoltTable addRowObjectsItem(Object rowObjectsItem) {
+    if (this.rowObjects == null) {
+      this.rowObjects = new ArrayList<Object>();
+    }
+    this.rowObjects.add(rowObjectsItem);
     return this;
   }
 
   /**
-   * Get columnCount
-   * @return columnCount
+   * Get rowObjects
+   * @return rowObjects
    **/
-  @JsonProperty("columnCount")
+  @JsonProperty("rowObjects")
   @Schema(description = "")
-  public Integer getColumnCount() {
-    return columnCount;
+  public List<Object> getRowObjects() {
+    return rowObjects;
   }
 
-  public void setColumnCount(Integer columnCount) {
-    this.columnCount = columnCount;
+  public void setRowObjects(List<Object> rowObjects) {
+    this.rowObjects = rowObjects;
+  }
+
+  public VoltTable activeRowIndex(Integer activeRowIndex) {
+    this.activeRowIndex = activeRowIndex;
+    return this;
+  }
+
+  /**
+   * Get activeRowIndex
+   * @return activeRowIndex
+   **/
+  @JsonProperty("activeRowIndex")
+  @Schema(description = "")
+  public Integer getActiveRowIndex() {
+    return activeRowIndex;
+  }
+
+  public void setActiveRowIndex(Integer activeRowIndex) {
+    this.activeRowIndex = activeRowIndex;
   }
 
   public VoltTable rawRow(VoltTableBuffer rawRow) {
@@ -221,52 +267,6 @@ public class VoltTable   {
     this.row = row;
   }
 
-  public VoltTable activeRowIndex(Integer activeRowIndex) {
-    this.activeRowIndex = activeRowIndex;
-    return this;
-  }
-
-  /**
-   * Get activeRowIndex
-   * @return activeRowIndex
-   **/
-  @JsonProperty("activeRowIndex")
-  @Schema(description = "")
-  public Integer getActiveRowIndex() {
-    return activeRowIndex;
-  }
-
-  public void setActiveRowIndex(Integer activeRowIndex) {
-    this.activeRowIndex = activeRowIndex;
-  }
-
-  public VoltTable rowObjects(List<Object> rowObjects) {
-    this.rowObjects = rowObjects;
-    return this;
-  }
-
-  public VoltTable addRowObjectsItem(Object rowObjectsItem) {
-    if (this.rowObjects == null) {
-      this.rowObjects = new ArrayList<Object>();
-    }
-    this.rowObjects.add(rowObjectsItem);
-    return this;
-  }
-
-  /**
-   * Get rowObjects
-   * @return rowObjects
-   **/
-  @JsonProperty("rowObjects")
-  @Schema(description = "")
-  public List<Object> getRowObjects() {
-    return rowObjects;
-  }
-
-  public void setRowObjects(List<Object> rowObjects) {
-    this.rowObjects = rowObjects;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -278,20 +278,20 @@ public class VoltTable   {
     }
     VoltTable voltTable = (VoltTable) o;
     return Objects.equals(this.buffer, voltTable.buffer) &&
-        Objects.equals(this.statusCode, voltTable.statusCode) &&
+        Objects.equals(this.columnCount, voltTable.columnCount) &&
+        Objects.equals(this.rowCount, voltTable.rowCount) &&
         Objects.equals(this.serializedSize, voltTable.serializedSize) &&
         Objects.equals(this.tableSchema, voltTable.tableSchema) &&
-        Objects.equals(this.rowCount, voltTable.rowCount) &&
-        Objects.equals(this.columnCount, voltTable.columnCount) &&
-        Objects.equals(this.rawRow, voltTable.rawRow) &&
-        Objects.equals(this.row, voltTable.row) &&
+        Objects.equals(this.statusCode, voltTable.statusCode) &&
+        Objects.equals(this.rowObjects, voltTable.rowObjects) &&
         Objects.equals(this.activeRowIndex, voltTable.activeRowIndex) &&
-        Objects.equals(this.rowObjects, voltTable.rowObjects);
+        Objects.equals(this.rawRow, voltTable.rawRow) &&
+        Objects.equals(this.row, voltTable.row);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(buffer, statusCode, serializedSize, tableSchema, rowCount, columnCount, rawRow, row, activeRowIndex, rowObjects);
+    return Objects.hash(buffer, columnCount, rowCount, serializedSize, tableSchema, statusCode, rowObjects, activeRowIndex, rawRow, row);
   }
 
 
@@ -301,15 +301,15 @@ public class VoltTable   {
     sb.append("class VoltTable {\n");
     
     sb.append("    buffer: ").append(toIndentedString(buffer)).append("\n");
-    sb.append("    statusCode: ").append(toIndentedString(statusCode)).append("\n");
+    sb.append("    columnCount: ").append(toIndentedString(columnCount)).append("\n");
+    sb.append("    rowCount: ").append(toIndentedString(rowCount)).append("\n");
     sb.append("    serializedSize: ").append(toIndentedString(serializedSize)).append("\n");
     sb.append("    tableSchema: ").append(toIndentedString(tableSchema)).append("\n");
-    sb.append("    rowCount: ").append(toIndentedString(rowCount)).append("\n");
-    sb.append("    columnCount: ").append(toIndentedString(columnCount)).append("\n");
+    sb.append("    statusCode: ").append(toIndentedString(statusCode)).append("\n");
+    sb.append("    rowObjects: ").append(toIndentedString(rowObjects)).append("\n");
+    sb.append("    activeRowIndex: ").append(toIndentedString(activeRowIndex)).append("\n");
     sb.append("    rawRow: ").append(toIndentedString(rawRow)).append("\n");
     sb.append("    row: ").append(toIndentedString(row)).append("\n");
-    sb.append("    activeRowIndex: ").append(toIndentedString(activeRowIndex)).append("\n");
-    sb.append("    rowObjects: ").append(toIndentedString(rowObjects)).append("\n");
     sb.append("}");
     return sb.toString();
   }

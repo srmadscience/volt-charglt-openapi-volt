@@ -69,7 +69,7 @@ public class DelUser extends VoltAPIProcedure {
             @ApiResponse(responseCode = "202", description = "Success", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "Error", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(
+    public VoltTable[] DelUser(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId)
             throws VoltAbortException {
 

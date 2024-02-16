@@ -70,7 +70,7 @@ public class GetUser extends VoltAPIProcedure {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = UserObject.class))),
             @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(
+    public VoltTable[] GetUser(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId)
             throws VoltAbortException {
 

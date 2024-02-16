@@ -102,7 +102,7 @@ public class ReportQuotaUsage extends VoltAPIProcedure {
      * @throws VoltAbortException
      */
 
-    public VoltTable[] run(
+    public VoltTable[] ReportQuotaUsage(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId,
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("unitsUsed") int unitsUsed,
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("unitsWanted") int unitsWanted,

@@ -22,7 +22,7 @@ import javax.validation.Valid;
 /**
  * TimestampType
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2024-02-13T22:26:01.216867Z[Europe/Dublin]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2024-02-16T08:28:20.310933Z[Europe/Dublin]")
 public class TimestampType   {
   @JsonProperty("time")
   private Long time = null;

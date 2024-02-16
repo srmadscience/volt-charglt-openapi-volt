@@ -79,7 +79,7 @@ public class UpdateLockedUser extends VoltAPIProcedure {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(
+    public VoltTable[] UpdateLockedUser(
             @Parameter(in = ParameterIn.PATH, description = "userId", required = true) @PathParam("userId") long userId,
             @Parameter(in = ParameterIn.PATH, description = "sessionId", required = true) @PathParam("sessionId") long sessionId,
             @Parameter(in = ParameterIn.PATH, description = "jsonPayload", required = true) @PathParam("jsonPayload") String jsonPayload,

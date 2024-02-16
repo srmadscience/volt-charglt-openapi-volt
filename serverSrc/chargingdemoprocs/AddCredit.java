@@ -100,7 +100,7 @@ public class AddCredit extends VoltAPIProcedure {
             @ApiResponse(responseCode = RESPONSE_200, description = "Added", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = AddCreditUserStatus.class))),
             @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(
+    public VoltTable[] AddCredit(
             @Parameter(in = ParameterIn.PATH, description = "User ID", required = true) @PathParam("userId") long userId,
             @Parameter(in = ParameterIn.PATH, description = "Credit Delta", required = true) @PathParam("extraCredit") long extraCredit,
             @Parameter(in = ParameterIn.PATH, description = "Transaction ID", required = true) @PathParam("txnId") String txnId)

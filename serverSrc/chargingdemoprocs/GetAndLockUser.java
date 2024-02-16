@@ -79,7 +79,7 @@ public class GetAndLockUser extends VoltAPIProcedure {
             @ApiResponse(responseCode = RESPONSE_200, description = "Locked", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = UserObject.class))),
             @ApiResponse(responseCode = RESPONSE_400, description = "No Such User", content = @Content(mediaType = "application/json;charset&#x3D;utf-8", schema = @Schema(implementation = Error.class))) })
 
-    public VoltTable[] run(long userId) throws VoltAbortException {
+    public VoltTable[] GetAndLockUser(long userId) throws VoltAbortException {
 
         voltQueueSQL(getUser, userId);
 
